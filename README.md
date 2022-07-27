@@ -21,11 +21,14 @@ http-server -p 8000
 ```
 
 > 4.所以此时我们需要nginx来做代理
+思路：
+  1. 启动一个nginx 8080端口的服务，访问localhost:8080/index.html
+  2. localhost:8080/index.html 会正向代理到  localhost:8000/index.html上
+  3. 将localhost:8080/api/login 会反向代理到  localhost:3000/api/login
+  4. 这样index.html 和 api请求在同一个8080端口上，就不会形成跨域了。
 
-**正向代理的是客户端，反向代理的是服务器**
+**注意：** 正向代理的是客户端，反向代理的是服务器
 
-- 将localhost:8080/index.html 正向代理到  localhost:8000/index.html上
-- 将localhost:8080/api/login 反向代理到  localhost:3000/api/login
 - 相关配置[nginx.conf](./nginx.conf)
 
 
